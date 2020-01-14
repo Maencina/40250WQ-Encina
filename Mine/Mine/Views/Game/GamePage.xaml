@@ -10,6 +10,10 @@
             <Label FontSize="Large" Text="Welcome to My Homework!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <Image
+                Source = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Seattle_Redhawks_logo.svg/914px-Seattle_Redhawks_logo.svg.png"
+                HeightRequest = "200"
+                WidthRequest = "200" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
