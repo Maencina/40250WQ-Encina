@@ -7,7 +7,7 @@
              x:Class="Mine.Views.GamePage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+            <Label FontSize="Large" Text="Welcome to My Homework!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>
