@@ -6,14 +6,15 @@
              mc:Ignorable="d"
              x:Class="Mine.Views.GamePage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label FontSize="Large" Text="Welcome to My Homework!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout  
+            VerticalOptions="CenterAndExpand"
+            HorizontalOptions="CenterAndExpand">
+            
+            <Label FontSize="Large" Text="Welcome to My Homework!"/>
             <Image
                 Source = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Seattle_Redhawks_logo.svg/914px-Seattle_Redhawks_logo.svg.png"
-                HeightRequest = "200"
-                WidthRequest = "200" />
+                HeightRequest = "100"
+                WidthRequest = "100" />
             <Button
                 Clicked="GameButton_Clicked"
                 Text="Go RedHawks" />
