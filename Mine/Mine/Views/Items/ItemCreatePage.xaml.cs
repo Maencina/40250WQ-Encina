@@ -30,6 +30,12 @@ namespace Mine.Views
             BindingContext = this.ViewModel = data;
         }
 
+        // Update the value of the Value property
+        void Value_OnStepperValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            ValueValue.Text = String.Format("{0}", e.NewValue);
+        }
+
         /// <summary>
         /// Save by calling for Create
         /// </summary>
