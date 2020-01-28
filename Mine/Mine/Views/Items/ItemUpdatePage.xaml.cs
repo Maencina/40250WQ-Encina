@@ -56,5 +56,14 @@ namespace Mine.Views
             // Pop the modal Update page off the ModalStack
             await Navigation.PopModalAsync();
         }
+
+        /// <summary>
+        /// Do not respond to Android back button
+        /// </summary>
+        /// <returns></returns>
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
+        }
     }
 }
