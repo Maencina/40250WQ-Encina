@@ -42,8 +42,8 @@ namespace Mine.Views
         async void Save_Clicked(object sender, EventArgs e)
         {
             MessagingCenter.Send(this, "Update", ViewModel.Data);
-            Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
-            await Navigation.PopAsync();
+            
+            await Navigation.PopModalAsync();
         }
 
         /// <summary>
@@ -53,9 +53,8 @@ namespace Mine.Views
         /// <param name="e"></param>
         async void Cancel_Clicked(object sender, EventArgs e)
         {
-            Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
-
-            await Navigation.PopAsync();
+            // Pop the modal Update page off the ModalStack
+            await Navigation.PopModalAsync();
         }
     }
 }
