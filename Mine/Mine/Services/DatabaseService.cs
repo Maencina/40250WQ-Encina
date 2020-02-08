@@ -5,7 +5,7 @@ using SQLite;
 using Mine.Models;
 
 
-namespace Mine
+namespace Mine.Services
 {
     public class DatabaseService
     {
