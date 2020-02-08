@@ -1,23 +1,27 @@
 ﻿using System;
 using System.IO;
-public static class Constants
+
+namespace Mine
 {
-    public const string DatabaseFilename = "TodoSQLite.db3";
-
-    public const SQLite.SQLiteOpenFlags Flags =
-        // open the database in read/write mode
-        SQLite.SQLiteOpenFlags.ReadWrite |
-        // create the database if it doesn't exist
-        SQLite.SQLiteOpenFlags.Create |
-        // enable multi-threaded database access
-        SQLite.SQLiteOpenFlags.SharedCache;
-
-    public static string DatabasePath
+    public static class Constants
     {
-        get
+        public const string DatabaseFilename = "TodoSQLite.db3";
+
+        public const SQLite.SQLiteOpenFlags Flags =
+            // open the database in read/write mode
+            SQLite.SQLiteOpenFlags.ReadWrite |
+            // create the database if it doesn't exist
+            SQLite.SQLiteOpenFlags.Create |
+            // enable multi-threaded database access
+            SQLite.SQLiteOpenFlags.SharedCache;
+
+        public static string DatabasePath
         {
-            var basePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            return Path.Combine(basePath, DatabaseFilename);
+            get
+            {
+                var basePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                return Path.Combine(basePath, DatabaseFilename);
+            }
         }
     }
 }
