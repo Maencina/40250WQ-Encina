@@ -73,7 +73,7 @@ namespace Mine.Services
             return (result == 1);
         }
 
-        public Task<List<ItemModel>> IndexAsync()
+        public Task<List<ItemModel>> IndexAsync(bool bForceRefresh = false)
         {
             return Database.Table<ItemModel>().ToListAsync();
         }
