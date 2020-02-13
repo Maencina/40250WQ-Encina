@@ -45,7 +45,14 @@ namespace Mine.ViewModels
         /// <summary>
         /// Connection to the Data store
         /// </summary>
-        public IDataStore<ItemModel> DataStore => DependencyService.Get<IDataStore<ItemModel>>();
+        // public IDataStore<ItemModel> DataStore => DependencyService.Get<IDataStore<ItemModel>>();
+
+        // Connections to the Data Stores
+        public IDataStore<ItemModel> DataSource_Mock => new MockDataStore();
+        public IDataStore<ItemModel> DataSource_SQL => new DatabaseService();
+        public IDataStore<ItemModel> DataStore;
+        public int CurrentDataSource = 0;
+
 
         // Command to force a Load of data
         public Command LoadDatasetCommand { get; set; }
@@ -59,6 +66,10 @@ namespace Mine.ViewModels
         /// </summary>
         public ItemIndexViewModel()
         {
+
+            // Default: Use the Mock Database 
+            SetDataSource(0);
+
             Title = "Items";
 
             Dataset = new ObservableCollection<ItemModel>();
@@ -81,7 +92,33 @@ namespace Mine.ViewModels
             {
                 await Update(data as ItemModel);
             });
+
+            MessagingCenter.Subscribe<AboutPage, int>(this, "SetDataSource", (obj, data) =>
+            {
+                SetDataSource(data);
+            });
+    }
+
+        /// <summary>
+        /// Select the appropriate Data Source
+        /// </summary>
+        /// <param name="isSQL"></param>
+        /// <returns></returns>
+        public bool SetDataSource(int isSQL)
+        {
+            if (isSQL == 1)
+            {
+                DataStore = DataSource_SQL;
+            }
+            else
+            {
+                DataStore = DataSource_Mock;
+            }
+
+            SetNeedsRefresh(true);
+            return true;
         }
+
 
         /// <summary>
         /// API to add the Data
