@@ -35,13 +35,12 @@ namespace Mine.Views
             // Flip the settings
             if (DataSourceValue.IsToggled == true)
             {
-
+                MessagingCenter.Send(this, "SetDataSource", 1);
             }
             else
             {
-
+                MessagingCenter.Send(this, "SetDataSource", 0);
             }
-
         }
     }
 }
