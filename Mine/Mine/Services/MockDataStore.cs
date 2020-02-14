@@ -41,6 +41,15 @@ namespace Mine.Services
         }
 
         /// <summary>
+        /// Clear data and load default.
+        /// </summary>
+        public void WipeDataList()
+        {
+            datalist.Clear();
+            LoadDefaultData();
+        }
+
+        /// <summary>
         /// Add the data to the list
         /// </summary>
         /// <param name="data"></param>
