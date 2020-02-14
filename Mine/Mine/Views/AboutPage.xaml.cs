@@ -23,7 +23,20 @@ namespace Mine.Views
             CurrentDateTime.Text = System.DateTime.Now.ToString("MM/dd/yy hh:mm:ss");
         }
 
+        /// <summary>
+        /// Wipe database data event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        async void WipeDataList_Clicked(object sender, EventArgs e)
+        {
+            bool answer = await DisplayAlert("Delete Data", "Are you sure you want to delete all data?", "Yes", "No");
 
+            if (answer)
+            {
+                MessagingCenter.Send(this, "WipeDataList", true);
+            }
+        }
 
         /// <summary>
         /// Data source toggled event
