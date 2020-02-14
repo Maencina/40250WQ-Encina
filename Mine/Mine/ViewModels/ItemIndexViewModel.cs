@@ -96,6 +96,21 @@ namespace Mine.ViewModels
                 await Update(data as ItemModel);
             });
 
+            // Register the Wipe Data List Message
+            MessagingCenter.Subscribe<AboutPage, bool>(this, "WipeDataList", (obj, data) =>
+            {
+                WipeDataList();
+            });
+
+        }
+
+        /// <summary>
+        /// Wipe the data and set the refresh flag. 
+        /// </summary>
+        public void WipeDataList()
+        {
+            DataStore.WipeDataList();
+            SetNeedsRefresh(true);
         }
 
         /// <summary>
