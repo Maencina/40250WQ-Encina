@@ -66,14 +66,17 @@ namespace Mine.ViewModels
         /// </summary>
         public ItemIndexViewModel()
         {
-
-            // Default: Use the Mock Database 
-            SetDataSource(0);
+            Initialize();
 
             Title = "Items";
 
             Dataset = new ObservableCollection<ItemModel>();
-            LoadDatasetCommand = new Command(async () => await ExecuteLoadDataCommand());
+
+            // Register the SetDataSource message.
+            MessagingCenter.Subscribe<AboutPage, int>(this, "SetDataSource", async (obj, data) =>
+            {
+                await SetDataSource(data);
+            });
 
             // Register the Create Message
             MessagingCenter.Subscribe<ItemCreatePage, ItemModel>(this, "Create", async (obj, data) =>
@@ -93,30 +96,46 @@ namespace Mine.ViewModels
                 await Update(data as ItemModel);
             });
 
-            MessagingCenter.Subscribe<AboutPage, int>(this, "SetDataSource", (obj, data) =>
-            {
-                SetDataSource(data);
-            });
-    }
+        }
+
+        /// <summary>
+        /// Initialize the ViewModel
+        /// Sets the collection Dataset
+        /// Sets the Load command
+        /// Sets the default data source
+        /// </summary>
+        public async void Initialize()
+        {
+            Dataset = new ObservableCollection<ItemModel>();
+            LoadDatasetCommand = new Command(async () => await ExecuteLoadDataCommand());
+
+            await SetDataSource(CurrentDataSource);   // Set to Mock to start with
+        }
+
 
         /// <summary>
         /// Select the appropriate Data Source
         /// </summary>
         /// <param name="isSQL"></param>
         /// <returns></returns>
-        public bool SetDataSource(int isSQL)
+        async public Task<bool> SetDataSource(int isSQL)
         {
             if (isSQL == 1)
             {
                 DataStore = DataSource_SQL;
+                CurrentDataSource = 1;
             }
             else
             {
                 DataStore = DataSource_Mock;
+                CurrentDataSource = 0;
             }
 
+            await ExecuteLoadDataCommand();
+
+            // Set flag for refresh
             SetNeedsRefresh(true);
-            return true;
+            return await Task.FromResult(true);
         }
 
 
