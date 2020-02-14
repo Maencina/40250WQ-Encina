@@ -35,6 +35,15 @@ namespace Mine.Services
             }
         }
 
+        /// <summary>
+        /// Wipe clean the DB
+        /// </summary>
+        public void WipeDataList()
+        {
+            Database.DropTableAsync<ItemModel>().GetAwaiter().GetResult();
+            Database.CreateTablesAsync(CreateFlags.None, typeof(ItemModel)).ConfigureAwait(false).GetAwaiter().GetResult();
+        }
+
         public Task<bool> CreateAsync(ItemModel item)
         {
             Database.InsertAsync(item);
